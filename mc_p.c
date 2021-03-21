@@ -27,6 +27,7 @@ void monte_carlo(long long points_per_process, int world_rank, int world_size) {
     if (world_rank == 0) {
         long long global_square_points = points_per_process * world_size;
         double pi = 4*((double) global_circle_points / (double) global_square_points);
+        printf("\n\n");
         printf("total points = %lld\n", global_square_points);
         printf("pi = %f\n", pi);
         printf("time = %f\n", end - start);
@@ -43,6 +44,12 @@ int main(int argc, char * argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+
+    char processor_name[MPI_MAX_PROCESSOR_NAME];
+    int name_len;
+    MPI_Get_processor_name(processor_name, &name_len);
+
+    printf("Initialized host: %s,", processor_name);
 
     long long points_per_process = size / world_size;
 
