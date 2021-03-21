@@ -49,7 +49,7 @@ int main(int argc, char * argv[]) {
     int name_len;
     MPI_Get_processor_name(processor_name, &name_len);
 
-    printf("Initialized host: %s,", processor_name);
+    printf("Initialized host: %s\n", processor_name);
 
     long long points_per_process = size / world_size;
 
