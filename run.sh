@@ -6,8 +6,7 @@
 #SBATCH --partition=plgrid
 #SBATCH --account=plgmpr21zeus
 
-cd /people/plgzuroslaw/mpr_2 || exit
-
+pwd
 module add plgrid/tools/openmpi
 mpicc -std=c99 -o mc_p mc_p.c
 echo "costam"
