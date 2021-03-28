@@ -8,5 +8,6 @@
 
 
 module add plgrid/tools/openmpi
+mpicc -std=c99 -o mc_p mc_p.c
 
 python3 ./run.py ./mc_p 10
