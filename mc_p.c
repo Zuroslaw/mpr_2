@@ -6,10 +6,14 @@
 void monte_carlo(long long points_per_process, int world_rank, int world_size) {
 
     srand(time(0) * world_rank);
+
     long long circle_points = 0;
+    long long global_circle_points;
+    double start;
+    double end;
 
     MPI_Barrier(MPI_COMM_WORLD);
-    double start = MPI_Wtime();
+    start = MPI_Wtime();
 
     for (long long i = 0; i < points_per_process; ++i) {
         double x = (double) rand() / (double) RAND_MAX;
@@ -19,9 +23,8 @@ void monte_carlo(long long points_per_process, int world_rank, int world_size) {
             circle_points++;
     }
 
-    long long global_circle_points;
     MPI_Reduce(&circle_points, &global_circle_points, 1, MPI_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
-    double end = MPI_Wtime();
+    end = MPI_Wtime();
 
 
     if (world_rank == 0) {
