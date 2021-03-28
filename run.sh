@@ -2,11 +2,11 @@
 #SBATCH --nodes 1
 #SBATCH --ntasks 12
 #SBATCH --constraint="intel"
-#SBATCH --time=01:00:00
+#SBATCH --time=24:00:00
 #SBATCH --partition=plgrid
 #SBATCH --account=plgmpr21zeus
 
 
 module add plgrid/tools/openmpi
 
-python3 ./run.py ./mc_p 2
+python3 ./run.py ./mc_p 10

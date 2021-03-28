@@ -12,7 +12,18 @@ os.mkdir("./results")
 
 big_size = 23950080000  # 50 * 12! ~ 80 sekund dla 12 watkow
 small_size = 23950080  # 12! / 20 ~ 0,9 sekundy dla 1 watku
-medium_size = 757368029  # ~ sqrt(big_size * small_size)
+medium_size = 757368029  # ~ sqrt(big_size * small_size) = ~ 24s dla 12 watkow
+
+# estimated experiment time:
+# strong:
+# small: (1/12 + 1/11 + ... + 1/1) ~ 3,1 -> 0,9 * 3,1 = 2,8s -> 2,8 * 10 repeats = 28s
+# medium: 12/(1 + 2 ... + 12) ~ 12 * 3,1 = 37,2 -> 37,2 * 24 = 893 s * 10 repeats = 8930s
+# big: 12/(1 + 2 ... + 12) ~ 12 * 3,1 = 37,2 -> 37,2 * 80 = 2976 s * 10 repeats = 29760s
+# weak:
+# small: 0,9 * 12 = 10,8s -> 10,8 * 10 repeats -> < 108s
+# medium: 24s * 12 = 288s -> 288 * 10 repeats -> 2880s
+# big: 80s * 12 = 960s -> 960s * 10 repeats -> 9600s
+# total: ~ 14,25h
 
 
 # runs a single mpiexec for given number of nodes, problem size and saves time to file
@@ -44,6 +55,11 @@ def weak(problem_size, problem_size_name):
 
 
 strong(small_size, "small")
+strong(medium_size, "medium")
+strong(big_size, "big")
+
 weak(small_size, "small")
+weak(medium_size, "medium")
+weak(big_size, "big")
 
 
