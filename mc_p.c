@@ -3,7 +3,7 @@
 #include <time.h>
 #include <mpi.h>
 
-void monte_carlo(long long points_per_process, int world_rank, int world_size) {
+void monte_carlo(long long points_per_process, int world_rank, int world_size, char* file_name) {
 
     srand(time(0) * world_rank);
 
@@ -33,13 +33,17 @@ void monte_carlo(long long points_per_process, int world_rank, int world_size) {
 //        printf("\n\n");
 //        printf("total points = %lld\n", global_square_points);
 //        printf("pi = %f\n", pi);
-        printf("%.*e\n", 10, end - start);
+        FILE* fp;
+        fopen_s(&fp, file_name, "a");
+        fprintf(fp, "%.*e\n", 10, end - start);
+        fclose(fp);
     }
 }
 
 int main(int argc, char * argv[]) {
     char* endptr;
     long long size = strtoll(argv[1], &endptr, 10);
+    char* file_name = argv[2];
 
     MPI_Init(NULL, NULL);
 
@@ -54,7 +58,7 @@ int main(int argc, char * argv[]) {
 
     long long points_per_process = size / world_size;
 
-    monte_carlo(points_per_process, world_rank, world_size);
+    monte_carlo(points_per_process, world_rank, world_size, file_name);
 
     MPI_Finalize();
 }
