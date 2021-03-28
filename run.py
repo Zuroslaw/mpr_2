@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+from datetime import datetime
 
 exec_path = sys.argv[1]  # path to compiled monte-carlo program
 repeats_series = int(sys.argv[2])  # number of repeats of experiment for series (1-12 nodes)
@@ -54,6 +55,10 @@ def weak(problem_size, problem_size_name):
     run_series_repeated(sizes, f"weak_{problem_size_name}")
 
 
+f = open("experiment.txt", "a")
+f.write("start: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+f.close()
+
 strong(small_size, "small")
 strong(medium_size, "medium")
 strong(big_size, "big")
@@ -62,4 +67,7 @@ weak(small_size, "small")
 weak(medium_size, "medium")
 weak(big_size, "big")
 
-
+f = open("experiment.txt", "a")
+f.write("\nend: ")
+f.write(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+f.close()
