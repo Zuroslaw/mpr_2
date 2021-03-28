@@ -33,7 +33,7 @@ void monte_carlo(long long points_per_process, int world_rank, int world_size) {
 //        printf("\n\n");
 //        printf("total points = %lld\n", global_square_points);
 //        printf("pi = %f\n", pi);
-        printf("%.*e", 10, end - start);
+        printf("%.*e\n", 10, end - start);
     }
 }
 
