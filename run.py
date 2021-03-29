@@ -13,7 +13,7 @@ os.mkdir("./results")
 
 big_size = 23950080000  # 50 * 12! ~ 80 sekund dla 12 watkow
 small_size = 23950080  # 12! / 20 ~ 0,9 sekundy dla 1 watku
-medium_size = 757368029  # ~ sqrt(big_size * small_size) = ~ 24s dla 12 watkow
+medium_size = 757368029  # ~ sqrt(big_size * small_size) = ~ 24s dla 1 watku
 
 # estimated experiment time:
 # strong:
@@ -51,7 +51,8 @@ def strong(problem_size, problem_size_name):
 
 
 def weak(problem_size, problem_size_name):
-    sizes = [int(round(problem_size / (12 - i))) for i in range(12)]
+    size_per_processor = int(round(problem_size / 12))
+    sizes = [size_per_processor * (i+1) for i in range(12)]
     run_series_repeated(sizes, f"weak_{problem_size_name}")
 
 
