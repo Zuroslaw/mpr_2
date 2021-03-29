@@ -61,9 +61,9 @@ f = open("experiment.txt", "a")
 f.write("start: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 f.close()
 
-# strong(small_size, "small")
-# strong(medium_size, "medium")
-# strong(big_size, "big")
+strong(small_size, "small")
+strong(medium_size, "medium")
+strong(big_size, "big")
 
 weak(small_size, "small")
 weak(medium_size, "medium")
