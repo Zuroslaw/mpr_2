@@ -53,6 +53,7 @@ def strong(problem_size, problem_size_name):
 def weak(problem_size, problem_size_name):
     size_per_processor = int(round(problem_size / 12))
     sizes = [size_per_processor * (i+1) for i in range(12)]
+    print(sizes)
     run_series_repeated(sizes, f"weak_{problem_size_name}")
 
 
@@ -60,9 +61,9 @@ f = open("experiment.txt", "a")
 f.write("start: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 f.close()
 
-strong(small_size, "small")
-strong(medium_size, "medium")
-strong(big_size, "big")
+# strong(small_size, "small")
+# strong(medium_size, "medium")
+# strong(big_size, "big")
 
 weak(small_size, "small")
 weak(medium_size, "medium")
